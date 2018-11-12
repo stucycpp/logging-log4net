@@ -22,6 +22,7 @@ using System;
 using log4net.Util;
 
 using NUnit.Framework;
+using NUnit.Framework.Constraints;
 
 #if NET_4_0 || MONO_4_0 || NETSTANDARD1_3
 using System.Linq.Expressions;
@@ -137,27 +138,23 @@ namespace log4net.Tests.Util
 			Assert.AreSame(typeof(SystemInfo), t, "Test explicit case in-sensitive type load lower");
 		}
 
-		[Test, ExpectedException(typeof(TypeLoadException))]
+		[Test]
 		public void TestGetTypeFromStringFails1()
 		{
-			Type t;
+            ActualValueDelegate<object> testDelegate = () => GetTypeFromString("LOG4NET.TESTS.UTIL.SYSTEMINFOTEST,LOG4NET.TESTS", false, false);
+            Assert.That(testDelegate, Throws.TypeOf<TypeLoadException>());
+            testDelegate = () => GetTypeFromString("LOG4NET.TESTS.UTIL.SYSTEMINFOTEST,LOG4NET.TESTS", true, false);
+            Assert.That(testDelegate, Throws.TypeOf<TypeLoadException>());
+        }
 
-			t = GetTypeFromString("LOG4NET.TESTS.UTIL.SYSTEMINFOTEST,LOG4NET.TESTS", false, false);
-			Assert.AreSame(null, t, "Test explicit case sensitive fails type load");
-
-			t = GetTypeFromString("LOG4NET.TESTS.UTIL.SYSTEMINFOTEST,LOG4NET.TESTS", true, false);
-		}
-
-		[Test, ExpectedException(typeof(TypeLoadException))]
+		[Test]
 		public void TestGetTypeFromStringFails2()
 		{
-			Type t;
-
-			t = GetTypeFromString("LOG4NET.TESTS.UTIL.SYSTEMINFOTEST", false, false);
-			Assert.AreSame(null, t, "Test explicit case sensitive fails type load");
-
-			t = GetTypeFromString("LOG4NET.TESTS.UTIL.SYSTEMINFOTEST", true, false);
-		}
+            ActualValueDelegate<object> testDelegate = () => GetTypeFromString("LOG4NET.TESTS.UTIL.SYSTEMINFOTEST", false, false);
+            Assert.That(testDelegate, Throws.TypeOf<TypeLoadException>());
+            testDelegate = () => GetTypeFromString("LOG4NET.TESTS.UTIL.SYSTEMINFOTEST", true, false);
+            Assert.That(testDelegate, Throws.TypeOf<TypeLoadException>());
+        }
 
 		// Wraps SystemInfo.GetTypeFromString because the method relies on GetCallingAssembly, which is
 		// unavailable in CoreFX. As a workaround, only overloads which explicitly take a Type or Assembly

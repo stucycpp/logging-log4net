@@ -36,7 +36,7 @@ namespace log4net.Tests.Core
 #if NETSTANDARD1_3
         [OneTimeSetUp]
 #else
-        [TestFixtureSetUp]
+        [OneTimeSetUp]
 #endif
 		public void CreateRepository()
 		{
@@ -123,21 +123,26 @@ namespace log4net.Tests.Core
 		}
 
 		private static LoggingEventData BuildStandardEventData()
-		{
-			LoggingEventData loggingEventData = new LoggingEventData();
-			loggingEventData.LoggerName = typeof(FixingTest).FullName;
-			loggingEventData.Level = Level.Warn;
-			loggingEventData.Message = "Logging event works";
-			loggingEventData.Domain = "ReallySimpleApp";
-			loggingEventData.LocationInfo = new LocationInfo(typeof(FixingTest).Name, "Main", "Class1.cs", "29"); //Completely arbitary
-			loggingEventData.ThreadName = Thread.CurrentThread.Name;
-			loggingEventData.TimeStampUtc = DateTime.UtcNow.Date;
-			loggingEventData.ExceptionString = "Exception occured here";
-			loggingEventData.UserName = "TestUser";
-			return loggingEventData;
-		}
+        {
+            LoggingEventData loggingEventData = NewMethod();
+            loggingEventData.LoggerName = typeof(FixingTest).FullName;
+            loggingEventData.Level = Level.Warn;
+            loggingEventData.Message = "Logging event works";
+            loggingEventData.Domain = "ReallySimpleApp";
+            loggingEventData.LocationInfo = new LocationInfo(typeof(FixingTest).Name, "Main", "Class1.cs", "29"); //Completely arbitary
+            loggingEventData.ThreadName = Thread.CurrentThread.Name;
+            loggingEventData.TimeStampUtc = DateTime.UtcNow.Date;
+            loggingEventData.ExceptionString = "Exception occured here";
+            loggingEventData.UserName = "TestUser";
+            return loggingEventData;
+        }
 
-		private static void AssertExpectedLoggingEvent(LoggingEvent loggingEvent, LoggingEventData loggingEventData)
+        private static LoggingEventData NewMethod()
+        {
+            return new LoggingEventData();
+        }
+
+        private static void AssertExpectedLoggingEvent(LoggingEvent loggingEvent, LoggingEventData loggingEventData)
 		{
 			Assert.AreEqual("ReallySimpleApp", loggingEventData.Domain, "Domain is incorrect");
 			Assert.AreEqual("System.Exception: This is the exception", loggingEvent.GetExceptionString(), "Exception is incorrect");

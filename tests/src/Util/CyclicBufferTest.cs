@@ -23,6 +23,7 @@ using log4net.Core;
 using log4net.Util;
 
 using NUnit.Framework;
+using NUnit.Framework.Constraints;
 
 namespace log4net.Tests.Util
 {
@@ -35,12 +36,13 @@ namespace log4net.Tests.Util
 	[TestFixture]
 	public class CyclicBufferTest
 	{
-		[Test, ExpectedException(typeof(ArgumentOutOfRangeException))]
+		[Test]
 		public void TestConstructorSize0()
 		{
-			CyclicBuffer cb = new CyclicBuffer(0);
-			Assert.IsNotNull(cb);
-		}
+
+            ActualValueDelegate<object> testDelegate = () => new CyclicBuffer(0);
+            Assert.That(testDelegate, Throws.TypeOf<ArgumentOutOfRangeException>());
+        }
 
 		[Test]
 		public void TestSize1()

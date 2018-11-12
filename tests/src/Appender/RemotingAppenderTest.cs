@@ -204,13 +204,17 @@ namespace log4net.Tests.Appender
 			{
 				BinaryClientFormatterSinkProvider clientSinkProvider = new BinaryClientFormatterSinkProvider();
 
-				BinaryServerFormatterSinkProvider serverSinkProvider = new BinaryServerFormatterSinkProvider();
-				serverSinkProvider.TypeFilterLevel = System.Runtime.Serialization.Formatters.TypeFilterLevel.Full;
+                BinaryServerFormatterSinkProvider serverSinkProvider = new BinaryServerFormatterSinkProvider
+                {
+                    TypeFilterLevel = System.Runtime.Serialization.Formatters.TypeFilterLevel.Full
+                };
 
-				Hashtable channelProperties = new Hashtable();
-				channelProperties["port"] = 8085;
+                Hashtable channelProperties = new Hashtable
+                {
+                    ["port"] = 8085
+                };
 
-				m_remotingChannel = new TcpChannel(channelProperties, clientSinkProvider, serverSinkProvider);
+                m_remotingChannel = new TcpChannel(channelProperties, clientSinkProvider, serverSinkProvider);
 				// Setup remoting server
 				try
 				{
@@ -265,7 +269,7 @@ namespace log4net.Tests.Appender
         /// <summary>
         /// Close down remoting infrastructure
         /// </summary>
-        [TestFixtureTearDown]
+        [OneTimeTearDown]
         public void UnregisterRemotingServerChannel() {
             if (m_remotingChannel != null) {
                 ((TcpChannel) m_remotingChannel).StopListening(null);
@@ -292,13 +296,15 @@ namespace log4net.Tests.Appender
 
 		private static RemotingAppender CreateAppender(FixFlags fixFlags)
 		{
-			RemotingAppender appender = new RemotingAppender();
-			appender.Sink = "tcp://localhost:8085/LoggingSink";
-			appender.Lossy = false;
-			appender.BufferSize = 1;
-			appender.Fix = fixFlags;
+            RemotingAppender appender = new RemotingAppender
+            {
+                Sink = "tcp://localhost:8085/LoggingSink",
+                Lossy = false,
+                BufferSize = 1,
+                Fix = fixFlags
+            };
 
-			appender.ActivateOptions();
+            appender.ActivateOptions();
 
 			return appender;
 		}
