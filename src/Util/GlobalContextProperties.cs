@@ -103,11 +103,12 @@ namespace log4net.Util
 			{
 				lock(m_syncRoot)
 				{
-					PropertiesDictionary mutableProps = new PropertiesDictionary(m_readOnlyProperties);
+                    PropertiesDictionary mutableProps = new PropertiesDictionary(m_readOnlyProperties)
+                    {
+                        [key] = value
+                    };
 
-					mutableProps[key] = value;
-
-					m_readOnlyProperties = new ReadOnlyPropertiesDictionary(mutableProps);
+                    m_readOnlyProperties = new ReadOnlyPropertiesDictionary(mutableProps);
 				}
 			}
 		}

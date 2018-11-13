@@ -40,8 +40,10 @@ namespace log4net.Tests.Appender
 
             ILoggerRepository rep = LogManager.CreateRepository(Guid.NewGuid().ToString());
 
-            DebugAppender debugAppender = new DebugAppender();
-            debugAppender.Layout = new SimpleLayout();
+            DebugAppender debugAppender = new DebugAppender
+            {
+                Layout = new SimpleLayout()
+            };
             debugAppender.ActivateOptions();
 
             debugAppender.Category = null;
@@ -71,8 +73,10 @@ namespace log4net.Tests.Appender
 
             ILoggerRepository rep = LogManager.CreateRepository(Guid.NewGuid().ToString());
 
-            DebugAppender debugAppender = new DebugAppender();
-            debugAppender.Layout = new SimpleLayout();
+            DebugAppender debugAppender = new DebugAppender
+            {
+                Layout = new SimpleLayout()
+            };
             debugAppender.ActivateOptions();
 
             debugAppender.Category = new PatternLayout("");
@@ -97,8 +101,10 @@ namespace log4net.Tests.Appender
 
             ILoggerRepository rep = LogManager.CreateRepository(Guid.NewGuid().ToString());
 
-            DebugAppender debugAppender = new DebugAppender();
-            debugAppender.Layout = new SimpleLayout();
+            DebugAppender debugAppender = new DebugAppender
+            {
+                Layout = new SimpleLayout()
+            };
             debugAppender.ActivateOptions();
 
             BasicConfigurator.Configure(rep, debugAppender);

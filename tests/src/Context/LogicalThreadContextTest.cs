@@ -50,10 +50,12 @@ namespace log4net.Tests.Context
 		[Test]
 		public void TestLogicalThreadPropertiesPatternBasicGetSet()
 		{
-			StringAppender stringAppender = new StringAppender();
-			stringAppender.Layout = new PatternLayout("%property{" + Utils.PROPERTY_KEY + "}");
+            StringAppender stringAppender = new StringAppender
+            {
+                Layout = new PatternLayout("%property{" + Utils.PROPERTY_KEY + "}")
+            };
 
-			ILoggerRepository rep = LogManager.CreateRepository(Guid.NewGuid().ToString());
+            ILoggerRepository rep = LogManager.CreateRepository(Guid.NewGuid().ToString());
 			BasicConfigurator.Configure(rep, stringAppender);
 
 			ILog log1 = LogManager.GetLogger(rep.Name, "TestLogicalThreadPropertiesPattern");
@@ -78,10 +80,12 @@ namespace log4net.Tests.Context
 		[Test]
 		public async Task TestLogicalThreadPropertiesPatternAsyncAwait()
 		{
-			StringAppender stringAppender = new StringAppender();
-			stringAppender.Layout = new PatternLayout("%property{" + Utils.PROPERTY_KEY + "}");
+            StringAppender stringAppender = new StringAppender
+            {
+                Layout = new PatternLayout("%property{" + Utils.PROPERTY_KEY + "}")
+            };
 
-			ILoggerRepository rep = LogManager.CreateRepository(Guid.NewGuid().ToString());
+            ILoggerRepository rep = LogManager.CreateRepository(Guid.NewGuid().ToString());
 			BasicConfigurator.Configure(rep, stringAppender);
 
 			ILog log1 = LogManager.GetLogger(rep.Name, "TestLogicalThreadPropertiesPattern");
@@ -119,10 +123,12 @@ namespace log4net.Tests.Context
 		[Test]
 		public void TestLogicalThreadStackPattern()
 		{
-			StringAppender stringAppender = new StringAppender();
-			stringAppender.Layout = new PatternLayout("%property{" + Utils.PROPERTY_KEY + "}");
+            StringAppender stringAppender = new StringAppender
+            {
+                Layout = new PatternLayout("%property{" + Utils.PROPERTY_KEY + "}")
+            };
 
-			ILoggerRepository rep = LogManager.CreateRepository(Guid.NewGuid().ToString());
+            ILoggerRepository rep = LogManager.CreateRepository(Guid.NewGuid().ToString());
 			BasicConfigurator.Configure(rep, stringAppender);
 
 			ILog log1 = LogManager.GetLogger(rep.Name, "TestThreadStackPattern");
@@ -146,10 +152,12 @@ namespace log4net.Tests.Context
 		[Test]
 		public void TestLogicalThreadStackPattern2()
 		{
-			StringAppender stringAppender = new StringAppender();
-			stringAppender.Layout = new PatternLayout("%property{" + Utils.PROPERTY_KEY + "}");
+            StringAppender stringAppender = new StringAppender
+            {
+                Layout = new PatternLayout("%property{" + Utils.PROPERTY_KEY + "}")
+            };
 
-			ILoggerRepository rep = LogManager.CreateRepository(Guid.NewGuid().ToString());
+            ILoggerRepository rep = LogManager.CreateRepository(Guid.NewGuid().ToString());
 			BasicConfigurator.Configure(rep, stringAppender);
 
 			ILog log1 = LogManager.GetLogger(rep.Name, "TestThreadStackPattern");
@@ -180,10 +188,12 @@ namespace log4net.Tests.Context
 		[Test]
 		public void TestLogicalThreadStackPatternNullVal()
 		{
-			StringAppender stringAppender = new StringAppender();
-			stringAppender.Layout = new PatternLayout("%property{" + Utils.PROPERTY_KEY + "}");
+            StringAppender stringAppender = new StringAppender
+            {
+                Layout = new PatternLayout("%property{" + Utils.PROPERTY_KEY + "}")
+            };
 
-			ILoggerRepository rep = LogManager.CreateRepository(Guid.NewGuid().ToString());
+            ILoggerRepository rep = LogManager.CreateRepository(Guid.NewGuid().ToString());
 			BasicConfigurator.Configure(rep, stringAppender);
 
 			ILog log1 = LogManager.GetLogger(rep.Name, "TestThreadStackPattern");
@@ -207,10 +217,12 @@ namespace log4net.Tests.Context
 		[Test]
 		public void TestLogicalThreadStackPatternNullVal2()
 		{
-			StringAppender stringAppender = new StringAppender();
-			stringAppender.Layout = new PatternLayout("%property{" + Utils.PROPERTY_KEY + "}");
+            StringAppender stringAppender = new StringAppender
+            {
+                Layout = new PatternLayout("%property{" + Utils.PROPERTY_KEY + "}")
+            };
 
-			ILoggerRepository rep = LogManager.CreateRepository(Guid.NewGuid().ToString());
+            ILoggerRepository rep = LogManager.CreateRepository(Guid.NewGuid().ToString());
 			BasicConfigurator.Configure(rep, stringAppender);
 
 			ILog log1 = LogManager.GetLogger(rep.Name, "TestThreadStackPattern");
@@ -241,10 +253,12 @@ namespace log4net.Tests.Context
 		[Test]
 		public async Task TestLogicalThreadStackPatternAsyncAwait()
 		{
-			StringAppender stringAppender = new StringAppender();
-			stringAppender.Layout = new PatternLayout("%property{" + Utils.PROPERTY_KEY + "}");
+            StringAppender stringAppender = new StringAppender
+            {
+                Layout = new PatternLayout("%property{" + Utils.PROPERTY_KEY + "}")
+            };
 
-			ILoggerRepository rep = LogManager.CreateRepository(Guid.NewGuid().ToString());
+            ILoggerRepository rep = LogManager.CreateRepository(Guid.NewGuid().ToString());
 			BasicConfigurator.Configure(rep, stringAppender);
 
 			ILog log1 = LogManager.GetLogger(rep.Name, "TestLogicalThreadStackPattern");
@@ -277,10 +291,12 @@ namespace log4net.Tests.Context
 
 		static async Task<string> SomeWorkProperties(string propertyName)
 		{
-			StringAppender stringAppender = new StringAppender();
-			stringAppender.Layout = new PatternLayout("%property{" + Utils.PROPERTY_KEY + "}");
+            StringAppender stringAppender = new StringAppender
+            {
+                Layout = new PatternLayout("%property{" + Utils.PROPERTY_KEY + "}")
+            };
 
-			ILoggerRepository rep = LogManager.CreateRepository(Guid.NewGuid().ToString());
+            ILoggerRepository rep = LogManager.CreateRepository(Guid.NewGuid().ToString());
 			BasicConfigurator.Configure(rep, stringAppender);
 
 			ILog log = LogManager.GetLogger(rep.Name, "TestLogicalThreadStackPattern");
@@ -307,10 +323,12 @@ namespace log4net.Tests.Context
 
 		static async Task<string> SomeWorkStack(string stackName)
 		{
-			StringAppender stringAppender = new StringAppender();
-			stringAppender.Layout = new PatternLayout("%property{" + Utils.PROPERTY_KEY + "}");
+            StringAppender stringAppender = new StringAppender
+            {
+                Layout = new PatternLayout("%property{" + Utils.PROPERTY_KEY + "}")
+            };
 
-			ILoggerRepository rep = LogManager.CreateRepository(Guid.NewGuid().ToString());
+            ILoggerRepository rep = LogManager.CreateRepository(Guid.NewGuid().ToString());
 			BasicConfigurator.Configure(rep, stringAppender);
 
 			ILog log = LogManager.GetLogger(rep.Name, "TestLogicalThreadStackPattern");

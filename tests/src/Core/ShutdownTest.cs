@@ -42,10 +42,12 @@ namespace log4net.Tests.Core
 			// Create unique repository
 			ILoggerRepository rep = LogManager.CreateRepository(Guid.NewGuid().ToString());
 
-			// Create appender and configure repos
-			StringAppender stringAppender = new StringAppender();
-			stringAppender.Layout = new PatternLayout("%m");
-			BasicConfigurator.Configure(rep, stringAppender);
+            // Create appender and configure repos
+            StringAppender stringAppender = new StringAppender
+            {
+                Layout = new PatternLayout("%m")
+            };
+            BasicConfigurator.Configure(rep, stringAppender);
 
 			// Get logger from repos
 			ILog log1 = LogManager.GetLogger(rep.Name, "logger1");
@@ -60,10 +62,12 @@ namespace log4net.Tests.Core
 			Assert.AreEqual("", stringAppender.GetString(), "Test not logging while shutdown");
 			stringAppender.Reset();
 
-			// Create new appender and configure
-			stringAppender = new StringAppender();
-			stringAppender.Layout = new PatternLayout("%m");
-			BasicConfigurator.Configure(rep, stringAppender);
+            // Create new appender and configure
+            stringAppender = new StringAppender
+            {
+                Layout = new PatternLayout("%m")
+            };
+            BasicConfigurator.Configure(rep, stringAppender);
 
 			log1.Info("TestMessage3");
 			Assert.AreEqual("TestMessage3", stringAppender.GetString(), "Test logging re-configured");

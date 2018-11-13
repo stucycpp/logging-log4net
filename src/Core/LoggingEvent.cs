@@ -1407,13 +1407,15 @@ namespace log4net.Core
 				compositeProperties.Add(threadProperties);
 			}
 
-			// TODO: Add Repository Properties
+            // TODO: Add Repository Properties
 
-			// event properties
-			PropertiesDictionary eventProperties = new PropertiesDictionary();
-			eventProperties[UserNameProperty] = UserName;
-			eventProperties[IdentityProperty] = Identity;
-			compositeProperties.Add(eventProperties);
+            // event properties
+            PropertiesDictionary eventProperties = new PropertiesDictionary
+            {
+                [UserNameProperty] = UserName,
+                [IdentityProperty] = Identity
+            };
+            compositeProperties.Add(eventProperties);
 
 			compositeProperties.Add(GlobalContext.Properties.GetReadOnlyProperties());
                         m_compositeProperties = compositeProperties;

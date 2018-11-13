@@ -420,9 +420,11 @@ namespace log4net.Util
 			// Add all the builtin patterns
 			foreach(DictionaryEntry entry in s_globalRulesRegistry)
 			{
-                ConverterInfo converterInfo = new ConverterInfo();
-                converterInfo.Name = (string)entry.Key;
-                converterInfo.Type = (Type)entry.Value;
+                ConverterInfo converterInfo = new ConverterInfo
+                {
+                    Name = (string)entry.Key,
+                    Type = (Type)entry.Value
+                };
                 patternParser.PatternConverters.Add(entry.Key, converterInfo);
 			}
 			// Add the instance patterns
@@ -512,9 +514,11 @@ namespace log4net.Util
 			if (name == null) throw new ArgumentNullException("name");
 			if (type == null) throw new ArgumentNullException("type");
 
-            ConverterInfo converterInfo = new ConverterInfo();
-            converterInfo.Name = name;
-            converterInfo.Type = type;
+            ConverterInfo converterInfo = new ConverterInfo
+            {
+                Name = name,
+                Type = type
+            };
 
             AddConverter(converterInfo);
 		}

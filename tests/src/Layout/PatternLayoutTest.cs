@@ -76,10 +76,12 @@ namespace log4net.Tests.Layout
         [Test]
 		public void TestThreadPropertiesPattern()
 		{
-			StringAppender stringAppender = new StringAppender();
-            stringAppender.Layout = NewPatternLayout("%property{" + Utils.PROPERTY_KEY + "}");
+            StringAppender stringAppender = new StringAppender
+            {
+                Layout = NewPatternLayout("%property{" + Utils.PROPERTY_KEY + "}")
+            };
 
-			ILoggerRepository rep = LogManager.CreateRepository(Guid.NewGuid().ToString());
+            ILoggerRepository rep = LogManager.CreateRepository(Guid.NewGuid().ToString());
 			BasicConfigurator.Configure(rep, stringAppender);
 
 			ILog log1 = LogManager.GetLogger(rep.Name, "TestThreadProperiesPattern");
@@ -108,8 +110,10 @@ namespace log4net.Tests.Layout
 #endif
         public void TestStackTracePattern()
         {
-            StringAppender stringAppender = new StringAppender();
-            stringAppender.Layout = NewPatternLayout("%stacktrace{2}");
+            StringAppender stringAppender = new StringAppender
+            {
+                Layout = NewPatternLayout("%stacktrace{2}")
+            };
 
             ILoggerRepository rep = LogManager.CreateRepository(Guid.NewGuid().ToString());
             BasicConfigurator.Configure(rep, stringAppender);
@@ -124,10 +128,12 @@ namespace log4net.Tests.Layout
 		[Test]
 		public void TestGlobalPropertiesPattern()
 		{
-			StringAppender stringAppender = new StringAppender();
-            stringAppender.Layout = NewPatternLayout("%property{" + Utils.PROPERTY_KEY + "}");
+            StringAppender stringAppender = new StringAppender
+            {
+                Layout = NewPatternLayout("%property{" + Utils.PROPERTY_KEY + "}")
+            };
 
-			ILoggerRepository rep = LogManager.CreateRepository(Guid.NewGuid().ToString());
+            ILoggerRepository rep = LogManager.CreateRepository(Guid.NewGuid().ToString());
 			BasicConfigurator.Configure(rep, stringAppender);
 
 			ILog log1 = LogManager.GetLogger(rep.Name, "TestGlobalProperiesPattern");

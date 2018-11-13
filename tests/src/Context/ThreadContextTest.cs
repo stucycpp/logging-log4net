@@ -47,10 +47,12 @@ namespace log4net.Tests.Context
         [Test]
 		public void TestThreadPropertiesPattern()
 		{
-			StringAppender stringAppender = new StringAppender();
-			stringAppender.Layout = new PatternLayout("%property{" +  Utils.PROPERTY_KEY + "}");
+            StringAppender stringAppender = new StringAppender
+            {
+                Layout = new PatternLayout("%property{" + Utils.PROPERTY_KEY + "}")
+            };
 
-			ILoggerRepository rep = LogManager.CreateRepository(Guid.NewGuid().ToString());
+            ILoggerRepository rep = LogManager.CreateRepository(Guid.NewGuid().ToString());
 			BasicConfigurator.Configure(rep, stringAppender);
 
 			ILog log1 = LogManager.GetLogger(rep.Name, "TestThreadProperiesPattern");
@@ -75,10 +77,12 @@ namespace log4net.Tests.Context
 		[Test]
 		public void TestThreadStackPattern()
 		{
-			StringAppender stringAppender = new StringAppender();
-            stringAppender.Layout = new PatternLayout("%property{" + Utils.PROPERTY_KEY + "}");
+            StringAppender stringAppender = new StringAppender
+            {
+                Layout = new PatternLayout("%property{" + Utils.PROPERTY_KEY + "}")
+            };
 
-			ILoggerRepository rep = LogManager.CreateRepository(Guid.NewGuid().ToString());
+            ILoggerRepository rep = LogManager.CreateRepository(Guid.NewGuid().ToString());
 			BasicConfigurator.Configure(rep, stringAppender);
 
 			ILog log1 = LogManager.GetLogger(rep.Name, "TestThreadStackPattern");
@@ -102,10 +106,12 @@ namespace log4net.Tests.Context
 		[Test]
 		public void TestThreadStackPattern2()
 		{
-			StringAppender stringAppender = new StringAppender();
-            stringAppender.Layout = new PatternLayout("%property{" + Utils.PROPERTY_KEY + "}");
+            StringAppender stringAppender = new StringAppender
+            {
+                Layout = new PatternLayout("%property{" + Utils.PROPERTY_KEY + "}")
+            };
 
-			ILoggerRepository rep = LogManager.CreateRepository(Guid.NewGuid().ToString());
+            ILoggerRepository rep = LogManager.CreateRepository(Guid.NewGuid().ToString());
 			BasicConfigurator.Configure(rep, stringAppender);
 
 			ILog log1 = LogManager.GetLogger(rep.Name, "TestThreadStackPattern");
@@ -136,10 +142,12 @@ namespace log4net.Tests.Context
 		[Test]
 		public void TestThreadStackPatternNullVal()
 		{
-			StringAppender stringAppender = new StringAppender();
-            stringAppender.Layout = new PatternLayout("%property{" + Utils.PROPERTY_KEY + "}");
+            StringAppender stringAppender = new StringAppender
+            {
+                Layout = new PatternLayout("%property{" + Utils.PROPERTY_KEY + "}")
+            };
 
-			ILoggerRepository rep = LogManager.CreateRepository(Guid.NewGuid().ToString());
+            ILoggerRepository rep = LogManager.CreateRepository(Guid.NewGuid().ToString());
 			BasicConfigurator.Configure(rep, stringAppender);
 
 			ILog log1 = LogManager.GetLogger(rep.Name, "TestThreadStackPattern");
@@ -163,10 +171,12 @@ namespace log4net.Tests.Context
 		[Test]
 		public void TestThreadStackPatternNullVal2()
 		{
-			StringAppender stringAppender = new StringAppender();
-            stringAppender.Layout = new PatternLayout("%property{" + Utils.PROPERTY_KEY + "}");
+            StringAppender stringAppender = new StringAppender
+            {
+                Layout = new PatternLayout("%property{" + Utils.PROPERTY_KEY + "}")
+            };
 
-			ILoggerRepository rep = LogManager.CreateRepository(Guid.NewGuid().ToString());
+            ILoggerRepository rep = LogManager.CreateRepository(Guid.NewGuid().ToString());
 			BasicConfigurator.Configure(rep, stringAppender);
 
 			ILog log1 = LogManager.GetLogger(rep.Name, "TestThreadStackPattern");
@@ -199,8 +209,10 @@ namespace log4net.Tests.Context
 		[Test]
 		public void TestBackgroundThreadContextProperty()
 		{
-			StringAppender stringAppender = new StringAppender();
-			stringAppender.Layout = new PatternLayout("%property{DateTimeTodayToString}");
+            StringAppender stringAppender = new StringAppender
+            {
+                Layout = new PatternLayout("%property{DateTimeTodayToString}")
+            };
 
             ILoggerRepository rep = LogManager.CreateRepository(TestBackgroundThreadContextPropertyRepository = "TestBackgroundThreadContextPropertyRepository" + Guid.NewGuid().ToString());
 			BasicConfigurator.Configure(rep, stringAppender);

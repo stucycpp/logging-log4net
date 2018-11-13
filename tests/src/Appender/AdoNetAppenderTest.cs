@@ -41,9 +41,11 @@ namespace log4net.Tests.Appender
         {
             ILoggerRepository rep = LogManager.CreateRepository(Guid.NewGuid().ToString());
 
-            AdoNetAppender adoNetAppender = new AdoNetAppender();
-            adoNetAppender.BufferSize = -1;
-            adoNetAppender.ConnectionType = "log4net.Tests.Appender.AdoNet.Log4NetConnection";
+            AdoNetAppender adoNetAppender = new AdoNetAppender
+            {
+                BufferSize = -1,
+                ConnectionType = "log4net.Tests.Appender.AdoNet.Log4NetConnection"
+            };
             adoNetAppender.ActivateOptions();
 
             BasicConfigurator.Configure(rep, adoNetAppender);
@@ -60,9 +62,11 @@ namespace log4net.Tests.Appender
 
             int bufferSize = 5;
 
-            AdoNetAppender adoNetAppender = new AdoNetAppender();
-            adoNetAppender.BufferSize = bufferSize;
-            adoNetAppender.ConnectionType = "log4net.Tests.Appender.AdoNet.Log4NetConnection";
+            AdoNetAppender adoNetAppender = new AdoNetAppender
+            {
+                BufferSize = bufferSize,
+                ConnectionType = "log4net.Tests.Appender.AdoNet.Log4NetConnection"
+            };
             adoNetAppender.ActivateOptions();
 
             BasicConfigurator.Configure(rep, adoNetAppender);
@@ -301,18 +305,24 @@ namespace log4net.Tests.Appender
         [Test]
         public void NullPropertyProgmaticConfig()
         {
-            AdoNetAppenderParameter productIdParam = new AdoNetAppenderParameter();
-            productIdParam.ParameterName = "@productId";
-            productIdParam.DbType = DbType.String;
-            productIdParam.Size = 50;
-            RawPropertyLayout rawPropertyLayout = new RawPropertyLayout();
-            rawPropertyLayout.Key = "ProductId";
+            AdoNetAppenderParameter productIdParam = new AdoNetAppenderParameter
+            {
+                ParameterName = "@productId",
+                DbType = DbType.String,
+                Size = 50
+            };
+            RawPropertyLayout rawPropertyLayout = new RawPropertyLayout
+            {
+                Key = "ProductId"
+            };
             productIdParam.Layout = rawPropertyLayout;
 
-            AdoNetAppender appender = new AdoNetAppender();
-            appender.ConnectionType = typeof(Log4NetConnection).FullName;
-            appender.BufferSize = -1;
-            appender.CommandText = "INSERT INTO Log ([productId]) VALUES (@productId)";
+            AdoNetAppender appender = new AdoNetAppender
+            {
+                ConnectionType = typeof(Log4NetConnection).FullName,
+                BufferSize = -1,
+                CommandText = "INSERT INTO Log ([productId]) VALUES (@productId)"
+            };
             appender.AddParameter(productIdParam);
             appender.ActivateOptions();
 

@@ -65,10 +65,12 @@ namespace log4net.Tests.Core
 		[Test]
 		public void TestFormatString()
 		{
-			StringAppender stringAppender = new StringAppender();
-			stringAppender.Layout = new PatternLayout("%message");
+            StringAppender stringAppender = new StringAppender
+            {
+                Layout = new PatternLayout("%message")
+            };
 
-			ILoggerRepository rep = LogManager.CreateRepository(Guid.NewGuid().ToString());
+            ILoggerRepository rep = LogManager.CreateRepository(Guid.NewGuid().ToString());
 			BasicConfigurator.Configure(rep, stringAppender);
 
 			ILog log1 = LogManager.GetLogger(rep.Name, "TestFormatString");
@@ -122,10 +124,12 @@ namespace log4net.Tests.Core
 		[Test]
 		public void TestLogFormatApi_Debug()
 		{
-			StringAppender stringAppender = new StringAppender();
-			stringAppender.Layout = new PatternLayout("%level:%message");
+            StringAppender stringAppender = new StringAppender
+            {
+                Layout = new PatternLayout("%level:%message")
+            };
 
-			ILoggerRepository rep = LogManager.CreateRepository(Guid.NewGuid().ToString());
+            ILoggerRepository rep = LogManager.CreateRepository(Guid.NewGuid().ToString());
 			BasicConfigurator.Configure(rep, stringAppender);
 
 			ILog log1 = LogManager.GetLogger(rep.Name, "TestLogFormatApi_Debug");
@@ -180,11 +184,13 @@ namespace log4net.Tests.Core
 		[Test]
 		public void TestLogFormatApi_NoDebug()
 		{
-			StringAppender stringAppender = new StringAppender();
-			stringAppender.Threshold = Level.Info;
-			stringAppender.Layout = new PatternLayout("%level:%message");
+            StringAppender stringAppender = new StringAppender
+            {
+                Threshold = Level.Info,
+                Layout = new PatternLayout("%level:%message")
+            };
 
-			ILoggerRepository rep = LogManager.CreateRepository(Guid.NewGuid().ToString());
+            ILoggerRepository rep = LogManager.CreateRepository(Guid.NewGuid().ToString());
 			BasicConfigurator.Configure(rep, stringAppender);
 
 			ILog log1 = LogManager.GetLogger(rep.Name, "TestLogFormatApi_Debug");
@@ -240,10 +246,12 @@ namespace log4net.Tests.Core
 		[Test]
 		public void TestLogFormatApi_Info()
 		{
-			StringAppender stringAppender = new StringAppender();
-			stringAppender.Layout = new PatternLayout("%level:%message");
+            StringAppender stringAppender = new StringAppender
+            {
+                Layout = new PatternLayout("%level:%message")
+            };
 
-			ILoggerRepository rep = LogManager.CreateRepository(Guid.NewGuid().ToString());
+            ILoggerRepository rep = LogManager.CreateRepository(Guid.NewGuid().ToString());
 			BasicConfigurator.Configure(rep, stringAppender);
 
 			ILog log1 = LogManager.GetLogger(rep.Name, "TestLogFormatApi_Info");
@@ -298,11 +306,13 @@ namespace log4net.Tests.Core
 		[Test]
 		public void TestLogFormatApi_NoInfo()
 		{
-			StringAppender stringAppender = new StringAppender();
-			stringAppender.Threshold = Level.Warn;
-			stringAppender.Layout = new PatternLayout("%level:%message");
+            StringAppender stringAppender = new StringAppender
+            {
+                Threshold = Level.Warn,
+                Layout = new PatternLayout("%level:%message")
+            };
 
-			ILoggerRepository rep = LogManager.CreateRepository(Guid.NewGuid().ToString());
+            ILoggerRepository rep = LogManager.CreateRepository(Guid.NewGuid().ToString());
 			BasicConfigurator.Configure(rep, stringAppender);
 
 			ILog log1 = LogManager.GetLogger(rep.Name, "TestLogFormatApi_Info");
@@ -358,10 +368,12 @@ namespace log4net.Tests.Core
 		[Test]
 		public void TestLogFormatApi_Warn()
 		{
-			StringAppender stringAppender = new StringAppender();
-			stringAppender.Layout = new PatternLayout("%level:%message");
+            StringAppender stringAppender = new StringAppender
+            {
+                Layout = new PatternLayout("%level:%message")
+            };
 
-			ILoggerRepository rep = LogManager.CreateRepository(Guid.NewGuid().ToString());
+            ILoggerRepository rep = LogManager.CreateRepository(Guid.NewGuid().ToString());
 			BasicConfigurator.Configure(rep, stringAppender);
 
 			ILog log1 = LogManager.GetLogger(rep.Name, "TestLogFormatApi_Warn");
@@ -416,11 +428,13 @@ namespace log4net.Tests.Core
 		[Test]
 		public void TestLogFormatApi_NoWarn()
 		{
-			StringAppender stringAppender = new StringAppender();
-			stringAppender.Threshold = Level.Error;
-			stringAppender.Layout = new PatternLayout("%level:%message");
+            StringAppender stringAppender = new StringAppender
+            {
+                Threshold = Level.Error,
+                Layout = new PatternLayout("%level:%message")
+            };
 
-			ILoggerRepository rep = LogManager.CreateRepository(Guid.NewGuid().ToString());
+            ILoggerRepository rep = LogManager.CreateRepository(Guid.NewGuid().ToString());
 			BasicConfigurator.Configure(rep, stringAppender);
 
 			ILog log1 = LogManager.GetLogger(rep.Name, "TestLogFormatApi_Warn");
@@ -476,10 +490,12 @@ namespace log4net.Tests.Core
 		[Test]
 		public void TestLogFormatApi_Error()
 		{
-			StringAppender stringAppender = new StringAppender();
-			stringAppender.Layout = new PatternLayout("%level:%message");
+            StringAppender stringAppender = new StringAppender
+            {
+                Layout = new PatternLayout("%level:%message")
+            };
 
-			ILoggerRepository rep = LogManager.CreateRepository(Guid.NewGuid().ToString());
+            ILoggerRepository rep = LogManager.CreateRepository(Guid.NewGuid().ToString());
 			BasicConfigurator.Configure(rep, stringAppender);
 
 			ILog log1 = LogManager.GetLogger(rep.Name, "TestLogFormatApi_Error");
@@ -534,11 +550,13 @@ namespace log4net.Tests.Core
 		[Test]
 		public void TestLogFormatApi_NoError()
 		{
-			StringAppender stringAppender = new StringAppender();
-			stringAppender.Threshold = Level.Fatal;
-			stringAppender.Layout = new PatternLayout("%level:%message");
+            StringAppender stringAppender = new StringAppender
+            {
+                Threshold = Level.Fatal,
+                Layout = new PatternLayout("%level:%message")
+            };
 
-			ILoggerRepository rep = LogManager.CreateRepository(Guid.NewGuid().ToString());
+            ILoggerRepository rep = LogManager.CreateRepository(Guid.NewGuid().ToString());
 			BasicConfigurator.Configure(rep, stringAppender);
 
 			ILog log1 = LogManager.GetLogger(rep.Name, "TestLogFormatApi_Error");
@@ -594,10 +612,12 @@ namespace log4net.Tests.Core
 		[Test]
 		public void TestLogFormatApi_Fatal()
 		{
-			StringAppender stringAppender = new StringAppender();
-			stringAppender.Layout = new PatternLayout("%level:%message");
+            StringAppender stringAppender = new StringAppender
+            {
+                Layout = new PatternLayout("%level:%message")
+            };
 
-			ILoggerRepository rep = LogManager.CreateRepository(Guid.NewGuid().ToString());
+            ILoggerRepository rep = LogManager.CreateRepository(Guid.NewGuid().ToString());
 			BasicConfigurator.Configure(rep, stringAppender);
 
 			ILog log1 = LogManager.GetLogger(rep.Name, "TestLogFormatApi_Fatal");
@@ -652,11 +672,13 @@ namespace log4net.Tests.Core
 		[Test]
 		public void TestLogFormatApi_NoFatal()
 		{
-			StringAppender stringAppender = new StringAppender();
-			stringAppender.Threshold = Level.Off;
-			stringAppender.Layout = new PatternLayout("%level:%message");
+            StringAppender stringAppender = new StringAppender
+            {
+                Threshold = Level.Off,
+                Layout = new PatternLayout("%level:%message")
+            };
 
-			ILoggerRepository rep = LogManager.CreateRepository(Guid.NewGuid().ToString());
+            ILoggerRepository rep = LogManager.CreateRepository(Guid.NewGuid().ToString());
 			BasicConfigurator.Configure(rep, stringAppender);
 
 			ILog log1 = LogManager.GetLogger(rep.Name, "TestLogFormatApi_Fatal");

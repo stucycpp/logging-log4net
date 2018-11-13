@@ -73,9 +73,11 @@ namespace log4net.Tests.Hierarchy
 		public void TestAppender1()
 		{
 			log = (Logger)Utils.GetLogger("test").Logger;
-			CountingAppender a1 = new CountingAppender();
-			a1.Name = "testAppender1";
-			log.AddAppender(a1);
+            CountingAppender a1 = new CountingAppender
+            {
+                Name = "testAppender1"
+            };
+            log.AddAppender(a1);
 
 			IEnumerator enumAppenders = ((IEnumerable)log.Appenders).GetEnumerator();
 			Assert.IsTrue(enumAppenders.MoveNext());
@@ -90,12 +92,16 @@ namespace log4net.Tests.Hierarchy
 		[Test]
 		public void TestAppender2()
 		{
-			CountingAppender a1 = new CountingAppender();
-			a1.Name = "testAppender2.1";
-			CountingAppender a2 = new CountingAppender();
-			a2.Name = "testAppender2.2";
+            CountingAppender a1 = new CountingAppender
+            {
+                Name = "testAppender2.1"
+            };
+            CountingAppender a2 = new CountingAppender
+            {
+                Name = "testAppender2.2"
+            };
 
-			log = (Logger)Utils.GetLogger("test").Logger;
+            log = (Logger)Utils.GetLogger("test").Logger;
 			log.AddAppender(a1);
 			log.AddAppender(a2);
 

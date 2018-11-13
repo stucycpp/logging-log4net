@@ -131,9 +131,11 @@ namespace log4net.Tests.Appender
 		{
 			Repository.Hierarchy.Hierarchy h = (Repository.Hierarchy.Hierarchy)LogManager.CreateRepository("TestRepository");
 
-			PatternLayout layout = new PatternLayout();
-			layout.ConversionPattern = "%m%n";
-			layout.ActivateOptions();
+            PatternLayout layout = new PatternLayout
+            {
+                ConversionPattern = "%m%n"
+            };
+            layout.ActivateOptions();
 
 			appender.Layout = layout;
 			appender.ActivateOptions();
@@ -152,10 +154,12 @@ namespace log4net.Tests.Appender
 		/// <returns></returns>
 		private SmtpPickupDirAppender CreateSmtpPickupDirAppender(IErrorHandler handler)
 		{
-			SmtpPickupDirAppender appender = new SmtpPickupDirAppender();
-			appender.PickupDir = _testPickupDir;
-			appender.ErrorHandler = handler;
-			return appender;
+            SmtpPickupDirAppender appender = new SmtpPickupDirAppender
+            {
+                PickupDir = _testPickupDir,
+                ErrorHandler = handler
+            };
+            return appender;
 		}
 
 		/// <summary>

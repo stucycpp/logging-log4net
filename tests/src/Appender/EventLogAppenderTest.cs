@@ -42,9 +42,11 @@ namespace log4net.Tests.Appender
 		[Test]
 		public void TestGetEntryTypeForExistingApplicationName()
 		{
-			EventLogAppender eventAppender = new EventLogAppender();
-            eventAppender.ApplicationName = "Winlogon";
-			eventAppender.ActivateOptions();
+            EventLogAppender eventAppender = new EventLogAppender
+            {
+                ApplicationName = "Winlogon"
+            };
+            eventAppender.ActivateOptions();
 
 			Assert.AreEqual(
 				EventLogEntryType.Information,

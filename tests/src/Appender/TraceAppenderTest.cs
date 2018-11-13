@@ -41,8 +41,10 @@ namespace log4net.Tests.Appender
 
             ILoggerRepository rep = LogManager.CreateRepository(Guid.NewGuid().ToString());
 
-            TraceAppender traceAppender = new TraceAppender();
-            traceAppender.Layout = new SimpleLayout();
+            TraceAppender traceAppender = new TraceAppender
+            {
+                Layout = new SimpleLayout()
+            };
             traceAppender.ActivateOptions();
 
             BasicConfigurator.Configure(rep, traceAppender);

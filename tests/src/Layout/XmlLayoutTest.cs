@@ -64,20 +64,22 @@ namespace log4net.Tests.Layout
 		/// <returns>A useful LoggingEventData object</returns>
 		private LoggingEventData CreateBaseEvent()
 		{
-			LoggingEventData ed = new LoggingEventData();
-			ed.Domain = "Tests";
-			ed.ExceptionString = "";
-			ed.Identity = "TestRunner";
-			ed.Level = Level.Info;
-			ed.LocationInfo = new LocationInfo(GetType());
-			ed.LoggerName = "TestLogger";
-			ed.Message = "Test message";
-			ed.ThreadName = "TestThread";
-			ed.TimeStampUtc = DateTime.Today.ToUniversalTime();
-			ed.UserName = "TestRunner";
-			ed.Properties = new PropertiesDictionary();
+            LoggingEventData ed = new LoggingEventData
+            {
+                Domain = "Tests",
+                ExceptionString = "",
+                Identity = "TestRunner",
+                Level = Level.Info,
+                LocationInfo = new LocationInfo(GetType()),
+                LoggerName = "TestLogger",
+                Message = "Test message",
+                ThreadName = "TestThread",
+                TimeStampUtc = DateTime.Today.ToUniversalTime(),
+                UserName = "TestRunner",
+                Properties = new PropertiesDictionary()
+            };
 
-			return ed;
+            return ed;
 		}
 
 		private static string CreateEventNode(string message)
@@ -206,10 +208,12 @@ namespace log4net.Tests.Layout
 			evt.Properties["Property1"] = "prop1";
 
 			XmlLayout layout = new XmlLayout();
-			StringAppender stringAppender = new StringAppender();
-			stringAppender.Layout = layout;
+            StringAppender stringAppender = new StringAppender
+            {
+                Layout = layout
+            };
 
-			ILoggerRepository rep = LogManager.CreateRepository(Guid.NewGuid().ToString());
+            ILoggerRepository rep = LogManager.CreateRepository(Guid.NewGuid().ToString());
 			BasicConfigurator.Configure(rep, stringAppender);
 			ILog log1 = LogManager.GetLogger(rep.Name, "TestThreadProperiesPattern");
 
@@ -226,12 +230,16 @@ namespace log4net.Tests.Layout
 			LoggingEventData evt = CreateBaseEvent();
 			evt.Properties["Property1"] = "prop1";
 
-			XmlLayout layout = new XmlLayout();
-			layout.Base64EncodeProperties = true;
-			StringAppender stringAppender = new StringAppender();
-			stringAppender.Layout = layout;
+            XmlLayout layout = new XmlLayout
+            {
+                Base64EncodeProperties = true
+            };
+            StringAppender stringAppender = new StringAppender
+            {
+                Layout = layout
+            };
 
-			ILoggerRepository rep = LogManager.CreateRepository(Guid.NewGuid().ToString());
+            ILoggerRepository rep = LogManager.CreateRepository(Guid.NewGuid().ToString());
 			BasicConfigurator.Configure(rep, stringAppender);
 			ILog log1 = LogManager.GetLogger(rep.Name, "TestThreadProperiesPattern");
 
@@ -249,10 +257,12 @@ namespace log4net.Tests.Layout
 			evt.Properties["Property1"] = "prop1 \"quoted\"";
 
 			XmlLayout layout = new XmlLayout();
-			StringAppender stringAppender = new StringAppender();
-			stringAppender.Layout = layout;
+            StringAppender stringAppender = new StringAppender
+            {
+                Layout = layout
+            };
 
-			ILoggerRepository rep = LogManager.CreateRepository(Guid.NewGuid().ToString());
+            ILoggerRepository rep = LogManager.CreateRepository(Guid.NewGuid().ToString());
 			BasicConfigurator.Configure(rep, stringAppender);
 			ILog log1 = LogManager.GetLogger(rep.Name, "TestThreadProperiesPattern");
 
@@ -270,10 +280,12 @@ namespace log4net.Tests.Layout
 			evt.Properties["Property1"] = "mask this ->\uFFFF";
 
 			XmlLayout layout = new XmlLayout();
-			StringAppender stringAppender = new StringAppender();
-			stringAppender.Layout = layout;
+            StringAppender stringAppender = new StringAppender
+            {
+                Layout = layout
+            };
 
-			ILoggerRepository rep = LogManager.CreateRepository(Guid.NewGuid().ToString());
+            ILoggerRepository rep = LogManager.CreateRepository(Guid.NewGuid().ToString());
 			BasicConfigurator.Configure(rep, stringAppender);
 			ILog log1 = LogManager.GetLogger(rep.Name, "TestThreadProperiesPattern");
 
@@ -291,10 +303,12 @@ namespace log4net.Tests.Layout
 			evt.Properties["Property\uFFFF"] = "mask this ->\uFFFF";
 
 			XmlLayout layout = new XmlLayout();
-			StringAppender stringAppender = new StringAppender();
-			stringAppender.Layout = layout;
+            StringAppender stringAppender = new StringAppender
+            {
+                Layout = layout
+            };
 
-			ILoggerRepository rep = LogManager.CreateRepository(Guid.NewGuid().ToString());
+            ILoggerRepository rep = LogManager.CreateRepository(Guid.NewGuid().ToString());
 			BasicConfigurator.Configure(rep, stringAppender);
 			ILog log1 = LogManager.GetLogger(rep.Name, "TestThreadProperiesPattern");
 
@@ -309,8 +323,10 @@ namespace log4net.Tests.Layout
         [Test]
         public void BracketsInStackTracesKeepLogWellFormed() {
             XmlLayout layout = new XmlLayout();
-            StringAppender stringAppender = new StringAppender();
-            stringAppender.Layout = layout;
+            StringAppender stringAppender = new StringAppender
+            {
+                Layout = layout
+            };
 
             ILoggerRepository rep = LogManager.CreateRepository(Guid.NewGuid().ToString());
             BasicConfigurator.Configure(rep, stringAppender);
@@ -332,8 +348,10 @@ namespace log4net.Tests.Layout
         [Test]
         public void BracketsInStackTracesAreEscapedProperly() {
             XmlLayout layout = new XmlLayout();
-            StringAppender stringAppender = new StringAppender();
-            stringAppender.Layout = layout;
+            StringAppender stringAppender = new StringAppender
+            {
+                Layout = layout
+            };
 
             ILoggerRepository rep = LogManager.CreateRepository(Guid.NewGuid().ToString());
             BasicConfigurator.Configure(rep, stringAppender);

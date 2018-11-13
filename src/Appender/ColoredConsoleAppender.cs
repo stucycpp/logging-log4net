@@ -460,16 +460,17 @@ namespace log4net.Appender
 			// Lookup the codepage encoding for the console
 			System.Text.Encoding consoleEncoding = System.Text.Encoding.GetEncoding(GetConsoleOutputCP());
 
-			// Create a writer around the console stream
-			m_consoleOutputWriter = new System.IO.StreamWriter(consoleOutputStream, consoleEncoding, 0x100);
+            // Create a writer around the console stream
+            m_consoleOutputWriter = new System.IO.StreamWriter(consoleOutputStream, consoleEncoding, 0x100)
+            {
+                AutoFlush = true
+            };
 
-			m_consoleOutputWriter.AutoFlush = true;
-
-			// SuppressFinalize on m_consoleOutputWriter because all it will do is flush
-			// and close the file handle. Because we have set AutoFlush the additional flush
-			// is not required. The console file handle should not be closed, so we don't call
-			// Dispose, Close or the finalizer.
-			GC.SuppressFinalize(m_consoleOutputWriter);
+            // SuppressFinalize on m_consoleOutputWriter because all it will do is flush
+            // and close the file handle. Because we have set AutoFlush the additional flush
+            // is not required. The console file handle should not be closed, so we don't call
+            // Dispose, Close or the finalizer.
+            GC.SuppressFinalize(m_consoleOutputWriter);
 		}
 
 		#endregion // Override implementation of AppenderSkeleton

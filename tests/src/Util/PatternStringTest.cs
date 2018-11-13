@@ -102,9 +102,11 @@ namespace log4net.Tests.Util
 
         private static AppDomain CreateConfiguredDomain(string domainName, string configurationFileName)
         {
-            AppDomainSetup ads = new AppDomainSetup();
-            ads.ApplicationBase = AppDomain.CurrentDomain.BaseDirectory;
-            ads.ConfigurationFile = configurationFileName;
+            AppDomainSetup ads = new AppDomainSetup
+            {
+                ApplicationBase = AppDomain.CurrentDomain.BaseDirectory,
+                ConfigurationFile = configurationFileName
+            };
             AppDomain ad = AppDomain.CreateDomain(domainName, null, ads);
             return ad;
         }
