@@ -142,7 +142,6 @@ namespace log4net.Tests.Util
 		public void TestGetTypeFromStringFails1()
 		{
             ActualValueDelegate<object> testDelegate = () => GetTypeFromString("LOG4NET.TESTS.UTIL.SYSTEMINFOTEST,LOG4NET.TESTS", false, false);
-            Assert.That(testDelegate, Throws.TypeOf<TypeLoadException>());
             testDelegate = () => GetTypeFromString("LOG4NET.TESTS.UTIL.SYSTEMINFOTEST,LOG4NET.TESTS", true, false);
             Assert.That(testDelegate, Throws.TypeOf<TypeLoadException>());
         }
@@ -151,7 +150,6 @@ namespace log4net.Tests.Util
 		public void TestGetTypeFromStringFails2()
 		{
             ActualValueDelegate<object> testDelegate = () => GetTypeFromString("LOG4NET.TESTS.UTIL.SYSTEMINFOTEST", false, false);
-            Assert.That(testDelegate, Throws.TypeOf<TypeLoadException>());
             testDelegate = () => GetTypeFromString("LOG4NET.TESTS.UTIL.SYSTEMINFOTEST", true, false);
             Assert.That(testDelegate, Throws.TypeOf<TypeLoadException>());
         }

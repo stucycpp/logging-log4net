@@ -209,20 +209,20 @@ namespace log4net.Tests.Appender
                 PatternLayout patternLayout = new PatternLayout();
                 patternLayout.ActivateOptions();
 
-            RollingFileAppender roller = new RollingFileAppender
-            {
-                StaticLogFileName = false,
-                Layout = patternLayout,
-                AppendToFile = true,
-                RollingStyle = RollingFileAppender.RollingMode.Composite,
-                DatePattern = "dd_MM_yyyy",
-                MaxSizeRollBackups = 1,
-                CountDirection = 1,
-                PreserveLogFileNameExtension = true,
-                MaximumFileSize = "10KB",
-                File = c_fileName
-            };
-            roller.ActivateOptions();
+                RollingFileAppender roller = new RollingFileAppender
+                {
+                    StaticLogFileName = false,
+                    Layout = patternLayout,
+                    AppendToFile = true,
+                    RollingStyle = RollingFileAppender.RollingMode.Composite,
+                    DatePattern = "dd_MM_yyyy",
+                    MaxSizeRollBackups = 1,
+                    CountDirection = 1,
+                    PreserveLogFileNameExtension = true,
+                    MaximumFileSize = "10KB",
+                    File = c_fileName
+                };
+                roller.ActivateOptions();
                 _root.AddAppender(roller);
 
                 _root.Repository.Configured = true;
