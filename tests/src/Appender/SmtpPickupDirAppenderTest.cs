@@ -66,7 +66,7 @@ namespace log4net.Tests.Appender
 
 		public SmtpPickupDirAppenderTest()
 		{
-			_testPickupDir = Path.Combine(Directory.GetCurrentDirectory(), "SmtpPickupDirAppenderTest_PickupDir");
+			_testPickupDir = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "SmtpPickupDirAppenderTest_PickupDir");
 		}
 		/// <summary>
 		/// Sets up variables used for the tests
