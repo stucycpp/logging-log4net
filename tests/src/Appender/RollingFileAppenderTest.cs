@@ -158,8 +158,8 @@ namespace log4net.Tests.Appender
 		/// <param name="iExpectedCount"></param>
 		private static void VerifyFileCount(int iExpectedCount)
 		{
-                    VerifyFileCount(iExpectedCount, false);
-                }
+             VerifyFileCount(iExpectedCount, false);
+        }
 		/// <summary>
 		/// Finds the number of files that match the base file name,
 		/// and matches the result against an expected count
@@ -167,7 +167,9 @@ namespace log4net.Tests.Appender
 		/// <param name="iExpectedCount"></param>
 		private static void VerifyFileCount(int iExpectedCount, bool preserveLogFileNameExtension)
 		{
-			ArrayList alFiles = GetExistingFiles(c_fileName, preserveLogFileNameExtension);
+            string testFilePath = AppDomain.CurrentDomain.BaseDirectory + Path.GetFileName(c_fileName);
+
+            ArrayList alFiles = GetExistingFiles(testFilePath, preserveLogFileNameExtension);
 			Assert.IsNotNull(alFiles);
 			Assert.AreEqual(iExpectedCount, alFiles.Count);
 		}
@@ -185,7 +187,9 @@ namespace log4net.Tests.Appender
         /// <param name="iFileNumber"></param>
         private static void CreateFile(int iFileNumber)
 		{
-			FileInfo fileInfo = new FileInfo(MakeFileName(c_fileName, iFileNumber));
+            string testFilePath = AppDomain.CurrentDomain.BaseDirectory + MakeFileName(c_fileName, iFileNumber);
+
+            FileInfo fileInfo = new FileInfo(testFilePath);
 
 			FileStream fileStream = null;
 			try
@@ -228,18 +232,20 @@ namespace log4net.Tests.Appender
                 PatternLayout patternLayout = new PatternLayout();
                 patternLayout.ActivateOptions();
 
-                RollingFileAppender roller = new RollingFileAppender();
-                roller.StaticLogFileName = false;
-                roller.Layout = patternLayout;
-                roller.AppendToFile = true;
-                roller.RollingStyle = RollingFileAppender.RollingMode.Composite;
-                roller.DatePattern = "dd_MM_yyyy";
-                roller.MaxSizeRollBackups = 1;
-                roller.CountDirection = 1;
-                roller.PreserveLogFileNameExtension = true;
-                roller.MaximumFileSize = "10KB";
-                roller.File = c_fileName;
-                roller.ActivateOptions();
+            RollingFileAppender roller = new RollingFileAppender
+            {
+                StaticLogFileName = false,
+                Layout = patternLayout,
+                AppendToFile = true,
+                RollingStyle = RollingFileAppender.RollingMode.Composite,
+                DatePattern = "dd_MM_yyyy",
+                MaxSizeRollBackups = 1,
+                CountDirection = 1,
+                PreserveLogFileNameExtension = true,
+                MaximumFileSize = "10KB",
+                File = c_fileName
+            };
+            roller.ActivateOptions();
                 _root.AddAppender(roller);
 
                 _root.Repository.Configured = true;
@@ -350,20 +356,22 @@ namespace log4net.Tests.Appender
 			//
 			PatternLayout layout = new PatternLayout("%m%n");
 
-			//
-			// Create the new appender
-			//
-			RollingFileAppender appender = new RollingFileAppender();
-			appender.Layout = layout;
-			appender.File = c_fileName;
-                        appender.Encoding = Encoding.ASCII;
-			appender.MaximumFileSize = c_iMaximumFileSize.ToString();
-			appender.MaxSizeRollBackups = _MaxSizeRollBackups;
-			appender.CountDirection = _iCountDirection;
-			appender.RollingStyle = RollingFileAppender.RollingMode.Size;
-			appender.LockingModel = lockModel;
+            //
+            // Create the new appender
+            //
+            RollingFileAppender appender = new RollingFileAppender
+            {
+                Layout = layout,
+                File = c_fileName,
+                Encoding = Encoding.ASCII,
+                MaximumFileSize = c_iMaximumFileSize.ToString(),
+                MaxSizeRollBackups = _MaxSizeRollBackups,
+                CountDirection = _iCountDirection,
+                RollingStyle = RollingFileAppender.RollingMode.Size,
+                LockingModel = lockModel
+            };
 
-			appender.ActivateOptions();
+            appender.ActivateOptions();
 
 			return appender;
 		}
@@ -815,10 +823,11 @@ namespace log4net.Tests.Appender
 		/// <returns></returns>
 		private static RollingStats InitializeStats(string sTestMessage)
 		{
-			RollingStats rollingStats = new RollingStats();
-
-			rollingStats.TotalMessageLength = TotalMessageLength(sTestMessage);
-			rollingStats.MessagesPerFile = MessagesPerFile(rollingStats.TotalMessageLength);
+            RollingStats rollingStats = new RollingStats
+            {
+                TotalMessageLength = TotalMessageLength(sTestMessage)
+            };
+            rollingStats.MessagesPerFile = MessagesPerFile(rollingStats.TotalMessageLength);
 			rollingStats.MessagesThisFile = 0;
 			rollingStats.NumberOfFileRolls = 0;
 
@@ -1239,14 +1248,16 @@ namespace log4net.Tests.Appender
 		public void TestInitializeRollBackups1()
 		{
 			string sBaseFile = "LogFile.log";
-			ArrayList arrFiles = new ArrayList();
-			arrFiles.Add("junk1");
-			arrFiles.Add("junk1.log");
-			arrFiles.Add("junk2.log");
-			arrFiles.Add("junk.log.1");
-			arrFiles.Add("junk.log.2");
+            ArrayList arrFiles = new ArrayList
+            {
+                "junk1",
+                "junk1.log",
+                "junk2.log",
+                "junk.log.1",
+                "junk.log.2"
+            };
 
-			int iExpectedCurSizeRollBackups = 0;
+            int iExpectedCurSizeRollBackups = 0;
 			VerifyInitializeRollBackupsFromBaseFile(sBaseFile, arrFiles, iExpectedCurSizeRollBackups);
 		}
 
@@ -1412,9 +1423,11 @@ namespace log4net.Tests.Appender
 				throw new ArgumentOutOfRangeException(sParams, sParams, "Must have 3 comma separated params: MaxSizeRollBackups, CurSizeRollBackups, CountDirection");
 			}
 
-			RollingFileAppender rfa = new RollingFileAppender();
-			rfa.RollingStyle = RollingFileAppender.RollingMode.Size;
-			SetFieldMaxSizeRollBackups(rfa, Int32.Parse(asParams[0].Trim()));
+            RollingFileAppender rfa = new RollingFileAppender
+            {
+                RollingStyle = RollingFileAppender.RollingMode.Size
+            };
+            SetFieldMaxSizeRollBackups(rfa, Int32.Parse(asParams[0].Trim()));
 			SetFieldCurSizeRollBackups(rfa, Int32.Parse(asParams[1].Trim()));
 			rfa.CountDirection = Int32.Parse(asParams[2].Trim());
 
@@ -1512,23 +1525,27 @@ namespace log4net.Tests.Appender
 		{
 			Repository.Hierarchy.Hierarchy h = (Repository.Hierarchy.Hierarchy)LogManager.CreateRepository("TestRepository");
 
-			RollingFileAppender appender = new RollingFileAppender();
-			appender.File = filename;
-			appender.AppendToFile = false;
-			appender.CountDirection = 0;
-			appender.RollingStyle = RollingFileAppender.RollingMode.Size;
-			appender.MaxFileSize = maxFileSize;
-			appender.Encoding = Encoding.ASCII;
-			appender.ErrorHandler = handler;
-			appender.MaxSizeRollBackups = maxSizeRollBackups;
-			if (lockModel != null)
+            RollingFileAppender appender = new RollingFileAppender
+            {
+                File = filename,
+                AppendToFile = false,
+                CountDirection = 0,
+                RollingStyle = RollingFileAppender.RollingMode.Size,
+                MaxFileSize = maxFileSize,
+                Encoding = Encoding.ASCII,
+                ErrorHandler = handler,
+                MaxSizeRollBackups = maxSizeRollBackups
+            };
+            if (lockModel != null)
 			{
 				appender.LockingModel = lockModel;
 			}
 
-			PatternLayout layout = new PatternLayout();
-			layout.ConversionPattern = "%m%n";
-			layout.ActivateOptions();
+            PatternLayout layout = new PatternLayout
+            {
+                ConversionPattern = "%m%n"
+            };
+            layout.ActivateOptions();
 
 			appender.Layout = layout;
 			appender.ActivateOptions();
@@ -1944,15 +1961,19 @@ namespace log4net.Tests.Appender
 		public void VerifyInitializeRollBackups(int iBackups, int iMaxSizeRollBackups)
 		{
 			string sBaseFile = "LogFile.log";
-			ArrayList arrFiles = new ArrayList();
-			arrFiles.Add("junk1");
-			for(int i = 0; i < iBackups; i++)
+            ArrayList arrFiles = new ArrayList
+            {
+                "junk1"
+            };
+            for (int i = 0; i < iBackups; i++)
 			{
 				arrFiles.Add(MakeFileName(sBaseFile, i));
 			}
-			RollingFileAppender rfa = new RollingFileAppender();
-			rfa.RollingStyle = RollingFileAppender.RollingMode.Size;
-			SetFieldMaxSizeRollBackups(rfa, iMaxSizeRollBackups);
+            RollingFileAppender rfa = new RollingFileAppender
+            {
+                RollingStyle = RollingFileAppender.RollingMode.Size
+            };
+            SetFieldMaxSizeRollBackups(rfa, iMaxSizeRollBackups);
 			SetFieldCurSizeRollBackups(rfa, 0);
 			InitializeRollBackups(rfa, sBaseFile, arrFiles);
 
@@ -2059,12 +2080,14 @@ namespace log4net.Tests.Appender
         }
 		private static ArrayList GetExistingFiles(string baseFilePath, bool preserveLogFileNameExtension)
 		{
-			RollingFileAppender appender = new RollingFileAppender();
-            appender.PreserveLogFileNameExtension = preserveLogFileNameExtension;
+            RollingFileAppender appender = new RollingFileAppender
+            {
+                PreserveLogFileNameExtension = preserveLogFileNameExtension,
 
-            appender.SecurityContext = NullSecurityContext.Instance;
+                SecurityContext = NullSecurityContext.Instance
+            };
 
-			return (ArrayList)Utils.InvokeMethod(appender, "GetExistingFiles", baseFilePath);
+            return (ArrayList)Utils.InvokeMethod(appender, "GetExistingFiles", baseFilePath);
 		}
 
 		private static void InitializeRollBackups(RollingFileAppender appender, string baseFile, ArrayList arrayFiles)
